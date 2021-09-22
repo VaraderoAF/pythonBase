@@ -52,11 +52,9 @@ def is_prime(num):
 
 def filter_numbers(nums, arg):
     if arg is ODD:
-        odds = []
         odds = list(filter(lambda x: x % 2 == 1, nums))
         return odds
     if arg is EVEN:
-        evens = []
         evens = list(filter(lambda x: x % 2 == 0, nums))
         return evens
     if arg is PRIME:
@@ -64,7 +62,7 @@ def filter_numbers(nums, arg):
         for num in nums:
             if is_prime(num) is False:
                 print('skip', num)
-            if is_prime(num) is True:
+            else:
                 print('add', num)
                 primes.append(num)
         return primes
