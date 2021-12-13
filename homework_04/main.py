@@ -13,6 +13,7 @@
 - закрытие соединения с БД
 """
 import asyncio
+import sys
 from homework_04 import models, jsonplaceholder_requests as jsr
 
 
@@ -39,8 +40,10 @@ async def async_main():
     await get_users(userdata, postdata)
 
 
-
 def main():
+    if sys.platform == "win32":
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
     asyncio.run(async_main())
 
 
