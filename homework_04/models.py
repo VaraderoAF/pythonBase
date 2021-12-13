@@ -59,7 +59,7 @@ class Post(Base):
     __tablename__ = "posts"
 
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     title = Column(String(256), nullable=False, default="", server_default="")
     body = Column(Text, nullable=False, default="", server_default="")
 
