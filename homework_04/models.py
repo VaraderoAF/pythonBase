@@ -54,7 +54,7 @@ class User(Base):
     def __repr__(self):
         return str(self)
 
-    posts = relationship("Post", back_populates="users")
+    posts = relationship("Post", back_populates="user")
 
 
 class Post(Base):
@@ -65,7 +65,7 @@ class Post(Base):
     title = Column(String(256), nullable=False, default="", server_default="")
     body = Column(Text, nullable=False, default="", server_default="")
 
-    users = relationship("User", back_populates="posts")
+    user = relationship("User", back_populates="posts")
 
     def __str__(self):
         return f'{self.__class__.__name__}(id={self.id}, title={self.title!r}, body={self.body!r})'
