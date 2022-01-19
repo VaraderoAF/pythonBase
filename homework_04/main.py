@@ -23,7 +23,7 @@ async def create_tables():
         await conn.run_sync(models.Base.metadata.create_all)
 
 
-async def get_users(userdata, postdata):
+async def get_data(userdata, postdata):
     async with models.Session() as session:
         async with session.begin():
             for user in userdata:
@@ -37,7 +37,7 @@ async def get_users(userdata, postdata):
 async def async_main():
     await create_tables()
     userdata, postdata = await asyncio.gather(jsr.fetch_json(jsr.USERS_DATA_URL), jsr.fetch_json(jsr.POSTS_DATA_URL))
-    await get_users(userdata, postdata)
+    await get_data(userdata, postdata)
 
 
 def main():

@@ -10,10 +10,19 @@
 в базовый шаблон добавьте навигационную панель nav (https://getbootstrap.com/docs/5.0/components/navbar/)
 в навигационную панель добавьте ссылки на главную страницу / и на страницу /about/ при помощи url_for
 """
-from flask import Flask
+from flask import Flask, render_template, url_for
 
 app = Flask(__name__)
 
 @app.route("/")
 def root():
-    return "<h1>Hello World!</h1>"
+    return render_template('base.html')
+
+@app.route('/about/')
+def about():
+    return "Вас предупреждали"
+
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
