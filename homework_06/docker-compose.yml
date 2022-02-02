@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  cars:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      CONFIG: DevelopmentConfig
+      SQLALCHEMY_DATABASE_URI: postgresql+psycopg2://car:pwd@pg:5432/cars
+    volumes:
+      - ./:/app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - pg
+
+  cars-prod:
+    build:
+      context: .
+      dockerfile: production/Dockerfile
+    environment:
+      CONFIG: ProductionConfig
+      SQLALCHEMY_DATABASE_URI: postgresql+psycopg2://car:pwd@pg:5432/cars
+    ports:
+      - "5080:80"
+    depends_on:
+      - pg
+
+  pg:
+    image: postgres 
+    environment:
+      POSTGRES_DB: cars
+      POSTGRES_USER: car
+      POSTGRES_PASSWORD: pwd
+    volumes:
+      - pg-data:/var/lib/postgresql/data/
+
+
+volumes:
+  pg-data:

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Cars list
+{% endblock %}
+
+{% block body %}
+<h1>Cars:</h1>
+<div>
+    <ul>
+        {% for car in cars %}
+            <li>
+                <a href="{{ url_for("cars_app.details", car_id=car.id) }}">
+                    {{ car.name -}}</a>
+                {{ car.created_at }}
+              {% if car.is_new %}
+                <span class="badge bg-secondary">New</span>
+              {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+<div>
+    <a href="{{ url_for("cars_app.add") }}">
+        Add new car
+    </a>
+</div>
+{% endblock %}

@@ -3,7 +3,7 @@ FROM python:3.9-buster
 # RUN pwd
 # RUN ps -la
 
-COPY /requirements.txt ./requirements.txt
+COPY /requirements-old-2.txt ./requirements.txt
 
 RUN pip install -r requirements.txt
 
