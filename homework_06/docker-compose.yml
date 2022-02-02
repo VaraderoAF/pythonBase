@@ -1,20 +1,6 @@
 version: '3'
 
 services:
-  cars:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    environment:
-      CONFIG: DevelopmentConfig
-      SQLALCHEMY_DATABASE_URI: postgresql+psycopg2://car:pwd@pg:5432/cars
-    volumes:
-      - ./:/app
-    ports:
-      - "5000:5000"
-    depends_on:
-      - pg
-
   cars-prod:
     build:
       context: .
