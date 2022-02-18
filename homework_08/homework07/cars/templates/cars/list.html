@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car list</title>
+</head>
+<body>
+<hi>Car list</hi>
+<ul>
+    <li>
+        <a href="/">Back to Homepage</a>
+    </li>
+</ul>
+<div class="car-list">
+    <ul>
+        {% for item in cars %}
+            <li>
+                {{ item}}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+</body>
+</html>
