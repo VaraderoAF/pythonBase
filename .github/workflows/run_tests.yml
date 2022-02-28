@@ -46,6 +46,6 @@ jobs:
             fi
         done
     - name: Test django
+      working-directory: homework07
       run: |
-        cd homework07
         python manage.py test
