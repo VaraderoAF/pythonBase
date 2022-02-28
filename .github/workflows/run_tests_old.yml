@@ -1,4 +1,4 @@
-name: Run tests for django
+name: Run tests for homework
 
 on: [push]
 
@@ -37,7 +37,7 @@ jobs:
         pip install flake8 pytest Faker requests pytest-asyncio
     - name: Install inner (homework-level) dependencies
       run: |
-        for d in homework_10 ; do
+        for d in homework_* ; do
           HW_REQUIREMENTS_PATH="$d/requirements.txt"
             if [ -f "$HW_REQUIREMENTS_PATH" ];
             then
@@ -49,7 +49,14 @@ jobs:
       run: |
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
-    - name: Test django
+    - name: Lint with flake8
       run: |
-        cd homework07
-        python manage.py test
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Test with pytest
+      run: |
+        pytest testing -s -vv -rsx
+      env:
+        SQLALCHEMY_PG_CONN_URI: postgresql+asyncpg://postgres:secretpassword@localhost:5432/postgres
